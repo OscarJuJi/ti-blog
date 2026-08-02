@@ -1,0 +1,53 @@
+# Configuration shared by the static site generator and the daily agent.
+
+[site]
+title = "IT Brief"
+tagline = "A daily digest of what happened in tech, plus notes of my own."
+description = "Daily digest of news from the IT world, curated automatically, plus posts by Oscar Juarez."
+author = "Oscar Juarez"
+# Origin of the deployed site, without a trailing slash.
+url = "https://oscarjuji.github.io"
+# Path prefix. This is a GitHub Pages *project* site, so every internal link
+# needs it. Use "" for a user site served from the root.
+base_url = "/ti-blog"
+language = "en"
+# Decides which calendar day a digest belongs to, and how dates are displayed.
+timezone = "America/Mexico_City"
+
+[agent]
+# Model used to write the digest. See https://ai.google.dev/gemini-api/docs/quickstart
+model = "gemini-3.6-flash"
+# Only entries published within this many hours of the run are considered. A bit
+# over 24 so that a late run never leaves a gap between two days.
+window_hours = 26
+# At most this many entries survive from a single feed...
+per_feed_limit = 6
+# ...and at most this many candidates are handed to the model.
+candidate_limit = 20
+# Bounds on how many stories the digest covers.
+min_stories = 5
+max_stories = 10
+
+[[agent.feeds]]
+name = "Hacker News"
+url = "https://hnrss.org/frontpage"
+
+[[agent.feeds]]
+name = "Ars Technica"
+url = "https://feeds.arstechnica.com/arstechnica/index"
+
+[[agent.feeds]]
+name = "The Verge"
+url = "https://www.theverge.com/rss/index.xml"
+
+[[agent.feeds]]
+name = "TechCrunch"
+url = "https://techcrunch.com/feed/"
+
+[[agent.feeds]]
+name = "dev.to"
+url = "https://dev.to/feed"
+
+[[agent.feeds]]
+name = "InfoQ"
+url = "https://feed.infoq.com/"

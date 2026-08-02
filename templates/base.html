@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="{{ lang }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ page_title }}</title>
+<meta name="description" content="{{ description }}">
+<link rel="canonical" href="{{ canonical }}">
+<link rel="alternate" type="application/rss+xml" title="{{ site_title }}" href="{{ feed_url }}">
+<link rel="stylesheet" href="{{ style_url }}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ page_title }}">
+<meta property="og:description" content="{{ description }}">
+<meta property="og:url" content="{{ canonical }}">
+</head>
+<body>
+<header class="site-header">
+  <a class="site-title" href="{{ home_url }}">{{ site_title }}</a>
+  <p class="tagline">{{ tagline }}</p>
+</header>
+
+<main>
+{{ content | safe }}
+</main>
+
+<footer class="site-footer">
+  <p>&copy; {{ year }} {{ author }}</p>
+  <p><a href="{{ feed_url }}">RSS</a> &middot; <a href="{{ admin_url }}">Write a post</a></p>
+</footer>
+</body>
+</html>

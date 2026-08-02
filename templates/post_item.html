@@ -1,0 +1,6 @@
+  <article class="post-item">
+    <time datetime="{{ iso_date }}">{{ display_date }}</time>
+    <h2><a href="{{ url }}">{{ title }}</a></h2>
+    <p>{{ summary }}</p>
+    {{ tags | safe }}
+  </article>

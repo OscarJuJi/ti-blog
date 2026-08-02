@@ -1,0 +1,43 @@
+# Sveltia CMS. Saving here commits to the repository, which rebuilds the site.
+
+backend:
+  name: github
+  repo: OscarJuJi/ti-blog
+  branch: main
+
+site_url: https://oscarjuji.github.io/ti-blog/
+display_url: https://oscarjuji.github.io/ti-blog/
+
+media_folder: static/images
+public_folder: /ti-blog/images
+
+collections:
+  - name: posts
+    label: Posts
+    label_singular: Post
+    folder: content/posts
+    create: true
+    extension: md
+    format: yaml-frontmatter
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{date | date('YYYY-MM-DD')}} — {{title}}"
+    sortable_fields: [date, title]
+    fields:
+      - { name: title, label: Title, widget: string }
+      - {
+          name: date,
+          label: Date,
+          widget: datetime,
+          format: "YYYY-MM-DD",
+          date_format: "YYYY-MM-DD",
+          time_format: false,
+        }
+      - {
+          name: description,
+          label: Summary,
+          widget: text,
+          required: false,
+          hint: One or two sentences, shown on the front page and in the feed.,
+        }
+      - { name: tags, label: Tags, widget: list, required: false }
+      - { name: body, label: Body, widget: markdown }

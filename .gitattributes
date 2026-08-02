@@ -1,0 +1,3 @@
+# Store everything with LF, so the workflow scripts run on Linux whatever the
+# checkout looked like on Windows.
+* text=auto eol=lf

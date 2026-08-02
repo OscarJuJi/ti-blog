@@ -1,0 +1,11 @@
+<article class="post">
+  <header class="post-header">
+    <time datetime="{{ iso_date }}">{{ display_date }}</time>
+    <h1>{{ title }}</h1>
+    {{ tags | safe }}
+  </header>
+
+{{ body | safe }}
+
+  <p class="back"><a href="{{ home_url }}">&larr; All posts</a></p>
+</article>
