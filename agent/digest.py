@@ -140,7 +140,12 @@ def render(day: dt.date, intro: str, stories: Sequence[Story]) -> str:
         for story in stories
     )
     body = f"{intro}\n\n{sections}" if intro else sections
-    return _document(day, description=intro or _first_headline(stories), body=body)
+    return _document(
+        day,
+        description=intro or _first_headline(stories),
+        body=body,
+        footer="Selected and summarized automatically from the sources linked above.",
+    )
 
 
 def render_links(day: dt.date, entries: Sequence[Entry]) -> str:
@@ -152,10 +157,15 @@ def render_links(day: dt.date, entries: Sequence[Entry]) -> str:
     links = "\n".join(
         f"- {_link(entry.title, entry.link)} - *{entry.source}*" for entry in entries
     )
-    return _document(day, description=note, body=f"{note}\n\n{links}")
+    return _document(
+        day,
+        description=note,
+        body=f"{note}\n\n{links}",
+        footer="Selected automatically from the sources linked above.",
+    )
 
 
-def _document(day: dt.date, *, description: str, body: str) -> str:
+def _document(day: dt.date, *, description: str, body: str, footer: str) -> str:
     title = f"Daily digest: {format_date(day)}"
     tags = "\n".join(f"  - {tag}" for tag in TAGS)
     return (
@@ -169,7 +179,7 @@ def _document(day: dt.date, *, description: str, body: str) -> str:
         "\n"
         f"{body}\n"
         "\n"
-        "*Selected and summarized automatically from the sources linked above.*\n"
+        f"*{footer}*\n"
     )
 
 

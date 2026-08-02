@@ -185,6 +185,14 @@ def test_without_a_model_it_publishes_the_links():
     assert "summaries could not be generated" in document
 
 
+def test_the_footer_does_not_claim_summaries_nobody_wrote():
+    written = digest.build(DAY, ENTRIES, llm=FakeLLM(answer(1, 2, 3)))
+    links_only = digest.build(DAY, ENTRIES, llm=None)
+
+    assert written.rstrip().endswith("*Selected and summarized automatically from the sources linked above.*")
+    assert links_only.rstrip().endswith("*Selected automatically from the sources linked above.*")
+
+
 def test_no_entries_is_an_error():
     with pytest.raises(digest.DigestError, match="no entries"):
         digest.build(DAY, [], llm=None)

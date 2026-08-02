@@ -20,4 +20,4 @@ The summaries could not be generated today, so here is the reading list on its o
 - [Angela Nissel faces down grief with a laugh](https://www.theverge.com/report/974226/angela-nissel-interview-good-grief-pass-the-bread-mom-is-dead) - *The Verge*
 - [Judge denies xAI’s request to block Minnesota ban on ‘nudify’ apps](https://techcrunch.com/2026/08/01/judge-denies-xais-request-to-block-minnesota-ban-on-nudify-apps/) - *TechCrunch*
 
-*Selected and summarized automatically from the sources linked above.*
+*Selected automatically from the sources linked above.*
