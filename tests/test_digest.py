@@ -86,7 +86,7 @@ def test_the_post_it_writes_is_a_post_the_generator_can_load(tmp_path):
     assert post.date == DAY
     assert post.tags == ("digest", "news")
     assert post.description == "A quiet day."
-    assert post.slug == "daily-digest"
+    assert post.slug == "2026-08-01-daily-digest"
 
 
 def test_links_come_from_the_feeds_not_from_the_model():

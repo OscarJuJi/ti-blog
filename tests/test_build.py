@@ -33,7 +33,7 @@ def test_writes_an_index_listing_every_post(site_dir):
 
 
 def test_writes_a_page_per_post_with_rendered_markdown(site_dir):
-    page = read(site_dir / "posts" / "how-this-blog-works" / "index.html")
+    page = read(site_dir / "posts" / "2026-08-01-how-this-blog-works" / "index.html")
 
     assert "<h1>How this blog works</h1>" in page
     assert "<h2>The generator</h2>" in page
@@ -42,7 +42,7 @@ def test_writes_a_page_per_post_with_rendered_markdown(site_dir):
 
 
 def test_internal_links_carry_the_project_prefix(site_dir):
-    page = read(site_dir / "posts" / "how-this-blog-works" / "index.html")
+    page = read(site_dir / "posts" / "2026-08-01-how-this-blog-works" / "index.html")
 
     assert 'href="/ti-blog/style.css"' in page
     assert 'href="/ti-blog/feed.xml"' in page

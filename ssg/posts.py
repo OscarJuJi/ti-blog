@@ -12,7 +12,6 @@ from ssg import frontmatter
 
 REQUIRED_KEYS = ("title", "date")
 
-_DATE_PREFIX = re.compile(r"^\d{4}-\d{2}-\d{2}-")
 _MONTHS = (
     "January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December",
@@ -117,8 +116,13 @@ def parse_date(raw: object, *, source: str) -> dt.date:
 
 
 def slug_for(path: Path) -> str:
-    """Derive a slug from a filename, dropping any leading ``YYYY-MM-DD-``."""
-    slug = slugify(_DATE_PREFIX.sub("", Path(path).stem))
+    """Derive a slug from a filename.
+
+    The whole stem is kept, date prefix included. Dropping the date reads better
+    but collides: every daily digest is called ``daily-digest``, so the second
+    one would fight the first for the same URL.
+    """
+    slug = slugify(Path(path).stem)
     if not slug:
         raise PostError(f"{Path(path).name}: filename yields an empty slug")
     return slug

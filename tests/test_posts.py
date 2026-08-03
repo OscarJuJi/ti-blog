@@ -21,13 +21,13 @@ def test_loads_a_post(tmp_path):
 
     post = posts.load(path)
 
-    assert post.slug == "hello-world"
+    assert post.slug == "2026-08-01-hello-world"
     assert post.title == "Hello world"
     assert post.date == dt.date(2026, 8, 1)
     assert post.description == "A greeting."
     assert post.tags == ("meta", "notes")
     assert post.body == "The body."
-    assert post.path == "posts/hello-world/"
+    assert post.path == "posts/2026-08-01-hello-world/"
     assert post.display_date == "August 1, 2026"
 
 
@@ -72,12 +72,21 @@ def test_load_all_returns_newest_first(tmp_path):
     write(tmp_path, "2026-07-30-older.md", "---\ntitle: Older\ndate: 2026-07-30\n---\n\nB.\n")
     write(tmp_path, "2026-08-01-newer.md", "---\ntitle: Newer\ndate: 2026-08-01\n---\n\nB.\n")
 
-    assert [post.slug for post in posts.load_all(tmp_path)] == ["newer", "older"]
+    assert [post.title for post in posts.load_all(tmp_path)] == ["Newer", "Older"]
+
+
+def test_a_recurring_post_gets_one_url_per_day(tmp_path):
+    """The digest is called the same thing every morning; the URLs must differ."""
+    write(tmp_path, "2026-08-01-daily-digest.md", "---\ntitle: A\ndate: 2026-08-01\n---\n\nB.\n")
+    write(tmp_path, "2026-08-02-daily-digest.md", "---\ntitle: B\ndate: 2026-08-02\n---\n\nB.\n")
+
+    slugs = [post.slug for post in posts.load_all(tmp_path)]
+    assert slugs == ["2026-08-02-daily-digest", "2026-08-01-daily-digest"]
 
 
 def test_load_all_rejects_two_files_with_the_same_slug(tmp_path):
-    write(tmp_path, "2026-07-30-note.md", "---\ntitle: A\ndate: 2026-07-30\n---\n\nB.\n")
-    write(tmp_path, "2026-08-01-note.md", "---\ntitle: B\ndate: 2026-08-01\n---\n\nB.\n")
+    write(tmp_path, "my-note.md", "---\ntitle: A\ndate: 2026-07-30\n---\n\nB.\n")
+    write(tmp_path, "my note.md", "---\ntitle: B\ndate: 2026-08-01\n---\n\nB.\n")
 
     with pytest.raises(posts.PostError, match="already used by"):
         posts.load_all(tmp_path)

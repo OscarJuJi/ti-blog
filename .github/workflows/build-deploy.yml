@@ -22,6 +22,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          # A called workflow runs at the caller's SHA. For the daily digest
+          # that SHA predates the commit the agent just pushed, so checking it
+          # out would deploy the site without the post that triggered the run.
+          ref: main
 
       - uses: actions/setup-python@v7
         with:
